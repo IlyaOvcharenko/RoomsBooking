@@ -10,7 +10,7 @@ using Web.App_Start;
 
 namespace Web.Auth
 {
-    public class CustomUserStoreService : IUserStore<AppUser>, IUserPasswordStore<AppUser>
+    public class CustomUserStoreService : IUserStore<AppUser>, IUserPasswordStore<AppUser>, IUserLockoutStore<AppUser, string>, IUserTwoFactorStore<AppUser, string>
     {
         [Inject]
         public IUserService UserService { get; set; }
@@ -99,7 +99,52 @@ namespace Web.Auth
 
         public Task UpdateAsync(AppUser user)
         {
+            return Task.FromResult(0);
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(AppUser user)
+        {
             throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEndDateAsync(AppUser user, DateTimeOffset lockoutEnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(AppUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(AppUser user)
+        {
+            return Task.Factory.StartNew<int>(() => 0);
+        }
+
+        public Task<int> GetAccessFailedCountAsync(AppUser user)
+        {
+            return Task.Factory.StartNew<int>(() => 1);
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(AppUser user)
+        {
+            return Task.Factory.StartNew<bool>(() => false);
+        }
+
+        public Task SetLockoutEnabledAsync(AppUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetTwoFactorEnabledAsync(AppUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync(AppUser user)
+        {
+            return Task.Factory.StartNew<bool>(() => false);
         }
     }
 }
