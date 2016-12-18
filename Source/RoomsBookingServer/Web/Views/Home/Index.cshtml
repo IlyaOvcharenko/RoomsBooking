@@ -1,5 +1,117 @@
 ﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Rooms Booking</h1>
+
 </div>
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Meeting rooms</div>
+        <div class="panel-body">
+            <div id="roomsGrid"></div>
+        </div>
+    </div>
+    
+</div>
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Booking requests</div>
+        <div class="panel-body">
+            <div id="requestsGrid"></div>
+        </div>
+    </div> 
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#roomsGrid").kendoGrid({
+                columns: [
+                    { "title": "№", "width": "100px", "field": "roomNumber" },
+                    { "title": "Number of seats", "width": "200px", "field": "numberOfSeats" },
+                    {
+                        field: '',
+                        title: '',
+                        name: "Marker board",          
+                        template: '<span class="glyphicon glyphicon-picture #=isBoardAvailable ? "" : "hidden"#"></span>',
+                        width: 40
+
+                    },
+                    {
+                        field: '',
+                        title: '',
+                        name: "Projector",          
+                        template: '<span class="glyphicon glyphicon-facetime-video #=isProjectorAvailable ? "" : "hidden"#"></span>',
+                        width: 40
+
+                    }
+                ],
+                height: 350,
+                dataSource: {
+                    transport: {
+                        read: "/api/MeetingRooms"
+                    },
+                    pageSize: 5,
+                    serverPaging: true,
+                    schema: {
+                        data: function(data) {
+                            return data.list;
+                        },
+                        total: function(data) {
+                            return data.entityCount;
+                        },
+
+                        model: {
+                            id: "id",
+                            fields: {
+                                roomNumber: { type: "string" },
+                                numberOfSeats: { type: "number" },
+                                isBoardAvailable: { type: "boolean" },
+                                isProjectorAvailable: { type: "boolean" }
+                            }
+                        }
+                    }
+                },
+
+                pageable: true
+            });
+
+            $("#requestsGrid").kendoGrid({
+                columns: [
+                    { "title": "№", "width": "100px", "field": "roomNumber" },
+                    { "title": "Number of seats", "width": "200px", "field": "numberOfSeats" },
+                    { "title": "isBoardAvailable", "field": "isBoardAvailable" },
+                    { "title": "isProjectorAvailable", "field": "isProjectorAvailable" }
+                ],
+                height: 350,
+                dataSource: {
+                    transport: {
+                        read: "/api/MeetingRooms"
+                    },
+                    pageSize: 5,
+                    serverPaging: true,
+                    schema: {
+                        data: function (data) {
+                            return data.list;
+                        },
+                        total: function (data) {
+                            return data.entityCount;
+                        },
+
+                        model: {
+                            id: "id",
+                            fields: {
+                                roomNumber: { type: "string" },
+                                numberOfSeats: { type: "number" },
+                                isBoardAvailable: { type: "string" },
+                                isProjectorAvailable: { type: "string" }
+                            }
+                        }
+                    }
+                },
+
+                pageable: true
+            });
+
+        });
+
+    </script>
+}

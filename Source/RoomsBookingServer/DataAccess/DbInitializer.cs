@@ -45,9 +45,16 @@ namespace DataAccess
                 },
                 new MeetingRoom
                 {
-                    RoomNumber = "102",
+                    RoomNumber = "102a",
                     NumberOfSeats = 6,
                     IsBoardAvailable = false,
+                    IsProjectorAvailable = false
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "102b",
+                    NumberOfSeats = 6,
+                    IsBoardAvailable = true,
                     IsProjectorAvailable = false
                 },
                 new MeetingRoom

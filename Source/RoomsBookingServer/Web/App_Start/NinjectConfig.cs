@@ -28,8 +28,11 @@ namespace Web.App_Start
         {
             kernel.Bind<DbContext>().To<DataContext>().InThreadScope();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IMeetingRoomsRepository>().To<MeetingRoomsRepository>();
             kernel.Bind<ICryptoManager>().To<MD5CryptoManager>();
             kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<IMeetingRoomsService>().To<MeetingRoomsService>();
+
         }
     }
 }

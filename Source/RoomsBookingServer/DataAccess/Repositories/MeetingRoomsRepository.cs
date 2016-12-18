@@ -12,7 +12,7 @@ namespace DataAccess.Repositories
     {
         public IQueryable<MeetingRoom> GetAllRooms()
         {
-            return DataContext.MeetingRooms.Include(r=>r.BookingRequests.Where(b=>b.DateTimeFrom.Date == DateTime.Today));   
+            return DataContext.MeetingRooms;   
         }
 
         public MeetingRoomsRepository(DataContext dataContext) : base(dataContext)

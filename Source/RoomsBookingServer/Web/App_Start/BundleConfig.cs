@@ -17,7 +17,11 @@ namespace Web
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+            bundles.Add(new ScriptBundle("~/bundles/kendo/js")
+                .Include("~/Scripts/kendo/2014.1.318/kendo.web.min.js")
+                .Include("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.en-US.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
 
@@ -33,6 +37,10 @@ namespace Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/kendo/css")
+               .Include("~/Content/kendo/2014.1.318/kendo.common.min.css", new CssRewriteUrlTransform())
+               .Include("~/Content/kendo/2014.1.318/kendo.silver.min.css", new CssRewriteUrlTransform()));
         }
     }
 }
