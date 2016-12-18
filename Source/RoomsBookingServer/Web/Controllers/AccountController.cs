@@ -53,6 +53,15 @@ namespace Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Authorize()
+        {
+            var claims = new ClaimsPrincipal(User).Claims.ToArray();
+            var identity = new ClaimsIdentity(claims, "Bearer");
+            AuthenticationManager.SignIn(identity);
+            return new EmptyResult();
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -74,7 +83,7 @@ namespace Web.Controllers
                 return View(model);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -103,7 +112,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email};
+                var user = new AppUser { UserName = model.Login};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
