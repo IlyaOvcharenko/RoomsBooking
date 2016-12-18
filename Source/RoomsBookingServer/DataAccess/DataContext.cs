@@ -15,12 +15,15 @@ namespace DataAccess
             Database.SetInitializer<DataContext>(new DbInitializer());
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<MeetingRoom> MeetingRooms { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().Property(p => p.Login).HasMaxLength(50).IsRequired();
             modelBuilder.Entity<User>().Property(p => p.Password).IsRequired();
 
+            modelBuilder.Entity<MeetingRoom>().Property(p => p.RoomNumber).HasMaxLength(10).IsRequired();
+    
             base.OnModelCreating(modelBuilder);
         }
     }

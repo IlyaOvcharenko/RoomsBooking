@@ -10,6 +10,7 @@ namespace Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.Title = "Main Page";
             return View();
         }
     }

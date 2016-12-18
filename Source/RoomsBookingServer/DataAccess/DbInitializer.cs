@@ -18,14 +18,49 @@ namespace DataAccess
         }
         protected override void Seed(DataContext context)
         {
-            var users = new Collection<User>
+            var admin = new User
             {
-                new User {Login = "admin", Role = Role.Admin, Password = "33354741122871651676713774147412831195"},
-                new User {Login = "user1", Role = Role.User, Password = "33354741122871651676713774147412831195"}
+                Login = "admin",
+                Role = Role.Admin,
+                Password = "33354741122871651676713774147412831195"
             };
 
+            var user = new User
+            {
+                Login = "user1",
+                Role = Role.User,
+                Password = "33354741122871651676713774147412831195"
+            };
+
+            var users = new Collection<User> {admin, user};
+
+            var rooms = new Collection<MeetingRoom>
+            {
+                new MeetingRoom
+                {
+                    RoomNumber = "101",
+                    NumberOfSeats = 10,
+                    IsBoardAvailable = true,
+                    IsProjectorAvailable = false
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "102",
+                    NumberOfSeats = 6,
+                    IsBoardAvailable = false,
+                    IsProjectorAvailable = false
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "210",
+                    NumberOfSeats = 30,
+                    IsBoardAvailable = true,
+                    IsProjectorAvailable = true
+                },
+            };
 
             context.Users.AddRange(users);
+            context.MeetingRooms.AddRange(rooms);
             base.Seed(context);
         }
     }

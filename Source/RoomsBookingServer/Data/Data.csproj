@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\BookingRequest.cs" />
+    <Compile Include="Entities\MeetingRoom.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

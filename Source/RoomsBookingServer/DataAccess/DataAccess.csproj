@@ -54,7 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseEntityRepository.cs" />
     <Compile Include="Repositories\IBaseEntityRepository.cs" />
+    <Compile Include="Repositories\IMeetingRoomsRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\MeetingRoomsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />

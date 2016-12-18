@@ -12,40 +12,40 @@ namespace BusinessLogic
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository userRepository;
-        private readonly ICryptoManager cryptoManager;
+        private readonly IUserRepository _userRepository;
+        private readonly ICryptoManager _cryptoManager;
 
         public UserService(IUserRepository userRepository, ICryptoManager cryptoManager)
         {
-            this.userRepository = userRepository;
-            this.cryptoManager = cryptoManager;
+            this._userRepository = userRepository;
+            this._cryptoManager = cryptoManager;
         }
 
         public Task<User> RegisterAsync(string login, string password)
         {
-            var user = new User { Login = login, Password = cryptoManager.GetHash(password), Role = Role.User };
-            var result = userRepository.AddUserAsync(user).Result;
+            var user = new User { Login = login, Password = _cryptoManager.GetHash(password), Role = Role.User };
+            var result = _userRepository.AddUserAsync(user).Result;
             return Task.FromResult(result);
         }
 
         public Task<User> FindByLoginAsync(string login)
         {
-            return userRepository.FindByLoginAsync(login);
+            return _userRepository.FindByLoginAsync(login);
         }
 
         public Task<User> FindByIdAsync(int id)
         {
-            return userRepository.FindByIdAsync(id);
+            return _userRepository.FindByIdAsync(id);
         }
 
         public string GetHashPasswordHash(string password)
         {
-            return cryptoManager.GetHash(password);
+            return _cryptoManager.GetHash(password);
         }
 
         public void Dispose()
         {
-            userRepository.Dispose();
+            _userRepository.Dispose();
         }
     }
 }
