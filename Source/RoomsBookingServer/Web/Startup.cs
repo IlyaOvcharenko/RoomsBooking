@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Microsoft.Owin;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
@@ -18,9 +19,13 @@ namespace Web
         {
             ConfigureAuth(app);
             var config = new HttpConfiguration();
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
             WebApiConfig.Register(config);
             app.UseNinjectMiddleware(() => NinjectConfig.CreateKernel.Value);
             app.UseNinjectWebApi(config);
+
+            
         }
     }
 }
