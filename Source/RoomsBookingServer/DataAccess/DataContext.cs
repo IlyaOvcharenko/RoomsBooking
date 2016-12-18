@@ -16,6 +16,7 @@ namespace DataAccess
         }
         public DbSet<User> Users { get; set; }
         public DbSet<MeetingRoom> MeetingRooms { get; set; }
+        public DbSet<BookingRequest> BookingRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

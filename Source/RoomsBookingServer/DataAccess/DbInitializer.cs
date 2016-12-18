@@ -66,8 +66,28 @@ namespace DataAccess
                 },
             };
 
+            var requests = new Collection<BookingRequest>
+            {
+                new BookingRequest
+                {
+                    CreateDateTime = DateTime.Now,
+                    CreateUser = users[1],
+                    DateTimeFrom = DateTime.Now.AddHours(1),
+                    DateTimeTo = DateTime.Now.AddHours(2),
+                    MeetingRoom = rooms[0]
+                },
+                new BookingRequest{
+                    CreateDateTime = DateTime.Now.AddHours(3),
+                    CreateUser = users[1],
+                    DateTimeFrom = DateTime.Now.AddHours(4),
+                    DateTimeTo = DateTime.Now.AddHours(5),
+                    MeetingRoom = rooms[2]
+                }
+            };
+
             context.Users.AddRange(users);
             context.MeetingRooms.AddRange(rooms);
+            context.BookingRequests.AddRange(requests);
             base.Seed(context);
         }
     }
