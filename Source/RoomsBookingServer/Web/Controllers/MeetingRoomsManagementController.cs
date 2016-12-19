@@ -11,6 +11,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MeetingRoomsManagementController : Controller
     {
         private readonly IMeetingRoomsService _meetingRoomsService;

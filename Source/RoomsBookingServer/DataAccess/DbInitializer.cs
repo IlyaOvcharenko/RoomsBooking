@@ -64,6 +64,55 @@ namespace DataAccess
                     IsBoardAvailable = true,
                     IsProjectorAvailable = true
                 },
+                new MeetingRoom
+                {
+                    RoomNumber = "210c",
+                    NumberOfSeats = 5,
+                    IsBoardAvailable = true,
+                    IsProjectorAvailable = true
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "301",
+                    NumberOfSeats = 11,
+                    IsBoardAvailable = true,
+                    IsProjectorAvailable = true
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "302",
+                    NumberOfSeats = 13,
+                    IsBoardAvailable = false,
+                    IsProjectorAvailable = true
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "302b",
+                    NumberOfSeats = 10,
+                    IsBoardAvailable = false,
+                    IsProjectorAvailable = true
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "401",
+                    NumberOfSeats = 30,
+                    IsBoardAvailable = true,
+                    IsProjectorAvailable = true
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "402",
+                    NumberOfSeats = 4,
+                    IsBoardAvailable = false,
+                    IsProjectorAvailable = false
+                },
+                new MeetingRoom
+                {
+                    RoomNumber = "403",
+                    NumberOfSeats = 6,
+                    IsBoardAvailable = false,
+                    IsProjectorAvailable = false
+                },
             };
 
             var requests = new Collection<BookingRequest>

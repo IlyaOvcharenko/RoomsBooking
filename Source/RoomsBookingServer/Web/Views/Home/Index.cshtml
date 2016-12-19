@@ -10,7 +10,9 @@
             <div id="roomsGrid"></div>
         </div>
     </div>
-    
+    <div class="col-md-10">
+        @Html.ActionLink("Add new room", "Create", "MeetingRoomsManagement", null, new { })
+    </div>
 </div>
 <div class="col-lg-6">
     <div class="panel panel-default">
@@ -35,7 +37,7 @@
                         width: 30
 
                     },
-                    { "title": "№", "width": "100px", "field": "roomNumber" },
+                    { "title": "Room", "width": "100px", "field": "roomNumber" },
                     { "title": "Number of seats", "width": "200px", "field": "numberOfSeats" },
                     {
                         field: '',
@@ -59,7 +61,7 @@
                     transport: {
                         read: "/api/MeetingRooms"
                     },
-                    pageSize: 10,
+                    pageSize: 8,
                     serverPaging: true,
                     schema: {
                         data: function (data) {
@@ -87,7 +89,7 @@
             $("#requestsGrid").kendoGrid({
                 columns: [
                     
-                    { "title": "№", "width": "35px", "field": "id" },
+                    //{ "title": "№", "width": "35px", "field": "id" },
                     { "title": "Room", "width": "60px", "field": "meetingRoomNumber" },
                     { "title": "From", "width": "135px", "field": "dateTimeFrom", "format": "{0:MM-dd-yyyy HH:mm}" },
                     { "title": "To", "width": "135px", "field": "dateTimeTo", "format": "{0:MM-dd-yyyy HH:mm}" },
@@ -107,7 +109,7 @@
                     transport: {
                         read: "/api/BookingRequests"
                     },
-                    pageSize: 10,
+                    pageSize: 8,
                     serverPaging: true,
                     schema: {
                         data: function (data) {
@@ -131,7 +133,7 @@
                 pageable: true
             });
 
-
+            setInterval(refreshRequestsGrid, 10000);
 
         });
         var confirmBookingRequest = function (id, action) {
@@ -142,13 +144,17 @@
                 data: "=" + action
 
             }).success(function (data) {
-                $("#requestsGrid").data("kendoGrid").dataSource.read();
+                refreshRequestsGrid();
             });
         }
 
         var editRoom = function(id) {
             var url = "@Url.Action("Edit","MeetingRoomsManagement", new { id = "XXX" })";
             window.location = url.replace("XXX", id);
+        }
+
+        var refreshRequestsGrid = function() {
+            $("#requestsGrid").data("kendoGrid").dataSource.read();
         }
     </script>
 }
