@@ -12,5 +12,11 @@ namespace BusinessLogic
     public interface IMeetingRoomsService : IDisposable
     {
         EntityDataPage<MeetingRoomDto> GetMeetingRoomsPage(int pageNumber, int pageSize);
+
+        MeetingRoom Get(int id);
+
+        void Create(MeetingRoom entity);
+
+        void Update(MeetingRoom entity);
     }
 }

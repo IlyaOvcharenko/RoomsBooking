@@ -26,6 +26,15 @@
         $(document).ready(function () {
             $("#roomsGrid").kendoGrid({
                 columns: [
+                    {
+
+                        field: '',
+                        title: '',
+                        template: '<span onclick="editRoom(#=id#)" class="glyphicon glyphicon-pencil action"> </span>',
+
+                        width: 30
+
+                    },
                     { "title": "№", "width": "100px", "field": "roomNumber" },
                     { "title": "Number of seats", "width": "200px", "field": "numberOfSeats" },
                     {
@@ -50,7 +59,7 @@
                     transport: {
                         read: "/api/MeetingRooms"
                     },
-                    pageSize: 5,
+                    pageSize: 10,
                     serverPaging: true,
                     schema: {
                         data: function (data) {
@@ -77,6 +86,7 @@
 
             $("#requestsGrid").kendoGrid({
                 columns: [
+                    
                     { "title": "№", "width": "35px", "field": "id" },
                     { "title": "Room", "width": "60px", "field": "meetingRoomNumber" },
                     { "title": "From", "width": "135px", "field": "dateTimeFrom", "format": "{0:MM-dd-yyyy HH:mm}" },
@@ -86,7 +96,6 @@
 
                         field: '',
                         title: '',
-                        name: "Marker board",
                         template: '<span onclick="confirmBookingRequest(#=id#, \'@RequestsConfirmationActions.Approve\')" class="glyphicon glyphicon-ok action #=isApproved || isApproved == false ? "hidden" : ""#"> </span> <span onclick="confirmBookingRequest(#=id#, \'@RequestsConfirmationActions.Reject\')" class="pull-right glyphicon glyphicon-remove action #=isApproved || isApproved == false ? "hidden" : ""#"></span> #=isApproved ? "Approved" : ""# #=isApproved == false? "Rejected" : ""#',
 
                         width: 80
@@ -98,7 +107,7 @@
                     transport: {
                         read: "/api/BookingRequests"
                     },
-                    pageSize: 5,
+                    pageSize: 10,
                     serverPaging: true,
                     schema: {
                         data: function (data) {
@@ -131,10 +140,15 @@
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 url: '/api/BookingRequests/' + id,
                 data: "=" + action
-                
+
             }).success(function (data) {
                 $("#requestsGrid").data("kendoGrid").dataSource.read();
             });
+        }
+
+        var editRoom = function(id) {
+            var url = "@Url.Action("Edit","MeetingRoomsManagement", new { id = "XXX" })";
+            window.location = url.replace("XXX", id);
         }
     </script>
 }

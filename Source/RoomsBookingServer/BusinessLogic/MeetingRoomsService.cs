@@ -46,6 +46,23 @@ namespace BusinessLogic
 
         }
 
+        public MeetingRoom Get(int id)
+        {
+            return _roomsRepository.GetById(id);
+        }
+
+        public void Create(MeetingRoom entity)
+        {
+            _roomsRepository.Add(entity);
+            _roomsRepository.SaveChanges();
+        }
+
+        public void Update(MeetingRoom entity)
+        {
+            _roomsRepository.Update(entity);
+            _roomsRepository.SaveChanges();
+        }
+
         public void Dispose()
         {
             _roomsRepository?.Dispose();
