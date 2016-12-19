@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.Dto;
 using BusinessLogic.Paging;
 using Data.Entities;
 using DataAccess.Repositories;
@@ -16,15 +18,25 @@ namespace BusinessLogic
         {
             _roomsRepository = roomsRepository;
         }
-        public EntityDataPage<MeetingRoom> GetMeetingRoomsPage(int pageNumber, int pageSize)
+        public EntityDataPage<MeetingRoomDto> GetMeetingRoomsPage(int pageNumber, int pageSize)
         {
-            var query = _roomsRepository.GetAllRooms()
+            var query = _roomsRepository.GetAllRooms().Select(
+                    r =>
+                        new MeetingRoomDto
+                        {
+                            Id = r.Id,
+                            NumberOfSeats = r.NumberOfSeats,
+                            RoomNumber = r.RoomNumber,
+                            IsBoardAvailable = r.IsBoardAvailable,
+                            IsProjectorAvailable = r.IsProjectorAvailable,
+                            BookingRequests = r.BookingRequests.Where(b => b.IsApproved.HasValue && b.IsApproved.Value && b.DateTimeFrom >= DateTime.Today)
+                        })
                 .OrderBy(r => r.RoomNumber);
             var count = query.Count();
             var list = query.Skip(pageSize * pageNumber)
                     .Take(pageSize)
                     .ToList();
-            return new EntityDataPage<MeetingRoom>
+            return new EntityDataPage<MeetingRoomDto>
             {
                 EntityCount = count,
                 List = list,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace DataAccess.Repositories
     {
         public IQueryable<MeetingRoom> GetAllRooms()
         {
-            return DataContext.MeetingRooms;   
+
+            return DataContext.MeetingRooms.Include(r => r.BookingRequests);
         }
 
         public MeetingRoomsRepository(DataContext dataContext) : base(dataContext)

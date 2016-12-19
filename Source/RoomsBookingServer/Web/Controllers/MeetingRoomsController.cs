@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using BusinessLogic;
+using BusinessLogic.Dto;
 using BusinessLogic.Paging;
 using Data.Entities;
 using Microsoft.AspNet.Identity;
@@ -28,7 +29,7 @@ namespace Web.Controllers
         }
 
         // GET api/MeetingRooms
-        public EntityDataPage<MeetingRoom> Get(int skip, int take, int page, int pageSize)
+        public EntityDataPage<MeetingRoomDto> Get(int skip, int take, int page, int pageSize)
         {
             return _meetingRoomsService.GetMeetingRoomsPage(page - 1, pageSize);
         }

@@ -229,9 +229,12 @@
     <Compile Include="Auth\AppUser.cs" />
     <Compile Include="Auth\CustomPasswordHasher.cs" />
     <Compile Include="Auth\CustomUserStoreService.cs" />
+    <Compile Include="Common\RequestsConfirmationActions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookingRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetingRoomsController.cs" />
+    <Compile Include="Controllers\MeetingRoomsManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -941,6 +944,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MeetingRoomsManagement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

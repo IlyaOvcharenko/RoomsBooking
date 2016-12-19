@@ -74,7 +74,8 @@ namespace DataAccess
                     CreateUser = users[1],
                     DateTimeFrom = DateTime.Now.AddHours(1),
                     DateTimeTo = DateTime.Now.AddHours(2),
-                    MeetingRoom = rooms[0]
+                    MeetingRoom = rooms[0],
+                    IsApproved = true
                 },
                 new BookingRequest{
                     CreateDateTime = DateTime.Now.AddHours(3),
@@ -82,6 +83,13 @@ namespace DataAccess
                     DateTimeFrom = DateTime.Now.AddHours(4),
                     DateTimeTo = DateTime.Now.AddHours(5),
                     MeetingRoom = rooms[2]
+                },
+                new BookingRequest{
+                    CreateDateTime = DateTime.Now.AddHours(3),
+                    CreateUser = users[1],
+                    DateTimeFrom = DateTime.Now.AddHours(4),
+                    DateTimeTo = DateTime.Now.AddHours(5),
+                    MeetingRoom = rooms[1]
                 }
             };
 

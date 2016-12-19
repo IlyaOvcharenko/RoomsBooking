@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Entities;
 
-namespace Data.Entities
+namespace BusinessLogic.Dto
 {
-    public class BookingRequest : BaseEntity
+    public class BookingRequestDto
     {
-        public int MeetingRoomId { get; set; }
+        public int Id { get; set; }
 
         public DateTime DateTimeFrom { get; set; }
 
@@ -16,11 +17,9 @@ namespace Data.Entities
 
         public bool? IsApproved { get; set; }
 
-        public int CreateUserId { get; set; }
-
         public DateTime CreateDateTime { get; set; }
 
-        public MeetingRoom MeetingRoom { get; set; }
+        public string MeetingRoomNumber { get; set; }
 
         public virtual User CreateUser { get; set; }
     }

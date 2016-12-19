@@ -7,7 +7,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             ViewBag.Title = "Main Page";

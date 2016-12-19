@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using BusinessLogic;
+using Data.Entities;
 using DataAccess;
 using DataAccess.Repositories;
 using Ninject;
@@ -28,11 +29,12 @@ namespace Web.App_Start
         {
             kernel.Bind<DbContext>().To<DataContext>().InThreadScope();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IBookingRequestsRepository>().To<BookingRequestsRepository>();
             kernel.Bind<IMeetingRoomsRepository>().To<MeetingRoomsRepository>();
             kernel.Bind<ICryptoManager>().To<MD5CryptoManager>();
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IMeetingRoomsService>().To<MeetingRoomsService>();
-
+            kernel.Bind<IBookingRequestsService>().To<BookingRequestsService>();
         }
     }
 }

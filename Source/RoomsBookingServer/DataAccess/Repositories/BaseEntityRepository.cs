@@ -32,7 +32,7 @@ namespace DataAccess.Repositories
             return DataContext.Set<T>();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return DataContext.Set<T>().FirstOrDefault(e => e.Id == id);
         }

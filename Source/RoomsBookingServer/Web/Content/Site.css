@@ -34,3 +34,7 @@ textarea {
         padding: 10px 15px;
     }
 }
+
+.action {
+    cursor: pointer
+}

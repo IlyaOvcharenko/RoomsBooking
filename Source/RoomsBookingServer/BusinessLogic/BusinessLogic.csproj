@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingRequestsService.cs" />
+    <Compile Include="Dto\BookingRequestDto.cs" />
+    <Compile Include="Dto\MeetingRoomDto.cs" />
+    <Compile Include="IBookingRequestsService.cs" />
     <Compile Include="IMeetingRoomsService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Paging\EntityDataPage.cs" />

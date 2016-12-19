@@ -1,4 +1,5 @@
-﻿<div class="jumbotron">
+﻿@using Web.Common
+<div class="jumbotron">
     <h1>Rooms Booking</h1>
 
 </div>
@@ -22,7 +23,7 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#roomsGrid").kendoGrid({
                 columns: [
                     { "title": "№", "width": "100px", "field": "roomNumber" },
@@ -30,7 +31,7 @@
                     {
                         field: '',
                         title: '',
-                        name: "Marker board",          
+                        name: "Marker board",
                         template: '<span class="glyphicon glyphicon-picture #=isBoardAvailable ? "" : "hidden"#"></span>',
                         width: 40
 
@@ -38,48 +39,11 @@
                     {
                         field: '',
                         title: '',
-                        name: "Projector",          
+                        name: "Projector",
                         template: '<span class="glyphicon glyphicon-facetime-video #=isProjectorAvailable ? "" : "hidden"#"></span>',
                         width: 40
 
                     }
-                ],
-                height: 350,
-                dataSource: {
-                    transport: {
-                        read: "/api/MeetingRooms"
-                    },
-                    pageSize: 5,
-                    serverPaging: true,
-                    schema: {
-                        data: function(data) {
-                            return data.list;
-                        },
-                        total: function(data) {
-                            return data.entityCount;
-                        },
-
-                        model: {
-                            id: "id",
-                            fields: {
-                                roomNumber: { type: "string" },
-                                numberOfSeats: { type: "number" },
-                                isBoardAvailable: { type: "boolean" },
-                                isProjectorAvailable: { type: "boolean" }
-                            }
-                        }
-                    }
-                },
-
-                pageable: true
-            });
-
-            $("#requestsGrid").kendoGrid({
-                columns: [
-                    { "title": "№", "width": "100px", "field": "roomNumber" },
-                    { "title": "Number of seats", "width": "200px", "field": "numberOfSeats" },
-                    { "title": "isBoardAvailable", "field": "isBoardAvailable" },
-                    { "title": "isProjectorAvailable", "field": "isProjectorAvailable" }
                 ],
                 height: 350,
                 dataSource: {
@@ -101,8 +65,8 @@
                             fields: {
                                 roomNumber: { type: "string" },
                                 numberOfSeats: { type: "number" },
-                                isBoardAvailable: { type: "string" },
-                                isProjectorAvailable: { type: "string" }
+                                isBoardAvailable: { type: "boolean" },
+                                isProjectorAvailable: { type: "boolean" }
                             }
                         }
                     }
@@ -111,7 +75,66 @@
                 pageable: true
             });
 
-        });
+            $("#requestsGrid").kendoGrid({
+                columns: [
+                    { "title": "№", "width": "35px", "field": "id" },
+                    { "title": "Room", "width": "60px", "field": "meetingRoomNumber" },
+                    { "title": "From", "width": "135px", "field": "dateTimeFrom", "format": "{0:MM-dd-yyyy HH:mm}" },
+                    { "title": "To", "width": "135px", "field": "dateTimeTo", "format": "{0:MM-dd-yyyy HH:mm}" },
+                    { "title": "User", "width": "60px", "field": "createUser.login" },
+                    {
 
+                        field: '',
+                        title: '',
+                        name: "Marker board",
+                        template: '<span onclick="confirmBookingRequest(#=id#, \'@RequestsConfirmationActions.Approve\')" class="glyphicon glyphicon-ok action #=isApproved || isApproved == false ? "hidden" : ""#"> </span> <span onclick="confirmBookingRequest(#=id#, \'@RequestsConfirmationActions.Reject\')" class="pull-right glyphicon glyphicon-remove action #=isApproved || isApproved == false ? "hidden" : ""#"></span> #=isApproved ? "Approved" : ""# #=isApproved == false? "Rejected" : ""#',
+
+                        width: 80
+
+                    }
+                ],
+                height: 350,
+                dataSource: {
+                    transport: {
+                        read: "/api/BookingRequests"
+                    },
+                    pageSize: 5,
+                    serverPaging: true,
+                    schema: {
+                        data: function (data) {
+                            return data.list;
+                        },
+                        total: function (data) {
+                            return data.entityCount;
+                        },
+
+                        model: {
+                            id: "id",
+                            fields: {
+                                roomNumber: { type: "string" },
+                                dateTimeFrom: { type: "date" },
+                                dateTimeTo: { type: "date" }
+                            }
+                        }
+                    }
+                },
+
+                pageable: true
+            });
+
+
+
+        });
+        var confirmBookingRequest = function (id, action) {
+            $.ajax({
+                type: 'PUT',
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                url: '/api/BookingRequests/' + id,
+                data: "=" + action
+                
+            }).success(function (data) {
+                $("#requestsGrid").data("kendoGrid").dataSource.read();
+            });
+        }
     </script>
 }
