@@ -1,0 +1,29 @@
+﻿<h2>Log in.</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Login</label>
+                        <div class="col-md-10">
+                            <input type="text" id="login" class="form-control" data-bind="value: viewModel.login.login, valueUpdate: 'afterkeydown'"/>
+                            <span class="field-validation-error text-danger" data-bind='visible: viewModel.login.login.hasError, text: viewModel.login.login.validationMessage'></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Password</label>
+                        <div class="col-md-10">
+                            <input type="password" id="password" class="form-control" data-bind="value: viewModel.login.password, valueUpdate: 'afterkeydown'"/>
+                            <span class="field-validation-error text-danger"  data-bind='visible: viewModel.login.password.hasError, text: viewModel.login.password.validationMessage'></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input data-bind="disable: viewModel.login.login.hasError() || viewModel.login.password.hasError(), click: loginClick" type="button" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                
+            </div>
+        </section>
+    </div>
+</div>
