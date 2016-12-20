@@ -29,7 +29,7 @@ namespace BusinessLogic
                             RoomNumber = r.RoomNumber,
                             IsBoardAvailable = r.IsBoardAvailable,
                             IsProjectorAvailable = r.IsProjectorAvailable,
-                            BookingRequests = r.BookingRequests.Where(b => b.IsApproved.HasValue && b.IsApproved.Value && b.DateTimeFrom >= DateTime.Today)
+                            BookingRequests = r.BookingRequests.Where(b => b.IsApproved.HasValue && b.IsApproved.Value && b.DateTimeFrom >= DateTime.Today).OrderBy(b=>b.DateTimeFrom)
                         })
                 .OrderBy(r => r.RoomNumber);
             var count = query.Count();

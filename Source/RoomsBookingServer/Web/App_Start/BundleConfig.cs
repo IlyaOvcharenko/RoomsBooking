@@ -21,7 +21,7 @@ namespace Web
                 .Include("~/Scripts/kendo/2014.1.318/kendo.web.min.js")
                 .Include("~/Scripts/kendo/2014.1.318/cultures/kendo.culture.en-US.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
 
