@@ -11,6 +11,7 @@ using BusinessLogic.Paging;
 using Data.Entities;
 using Microsoft.AspNet.Identity;
 using Web.Common;
+using Web.Hubs;
 using Web.Models;
 
 namespace Web.Controllers
@@ -52,15 +53,19 @@ namespace Web.Controllers
             {
                 return BadRequest("Request already " + (request.IsApproved.Value ? "approved" : "rejected"));
             }
-
+            string result;
             if (action == RequestsConfirmationActions.Approve)
             {
                 _bookingRequestsService.ApproveBookingRequest(id);
+                result = "approved";
             }
             else
             {
                 _bookingRequestsService.RejectBookingRequest(id);
+                result = "rejected";
             }
+            var context = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<BookingHub>();
+            context.Clients.Clients(BookingHub.Connections.Where(c=>c.UserId == request.CreateUser.Id.ToString()).Select(c=>c.ConnectionId).ToList()).sendNotification("Your request " + result);
             return Ok();
         }
     }

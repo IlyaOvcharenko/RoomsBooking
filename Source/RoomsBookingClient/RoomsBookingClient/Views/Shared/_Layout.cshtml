@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Configuration
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,6 +34,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo/js")
     @Scripts.Render("~/bundles/knockout")
+    <script src='@(ConfigurationManager.AppSettings["RoomsBookingServerUri"] + "signalr/hubs")'></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

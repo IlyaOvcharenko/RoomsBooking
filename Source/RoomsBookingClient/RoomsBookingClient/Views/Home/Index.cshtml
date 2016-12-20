@@ -249,7 +249,7 @@
                 });
             },
             init: function() {
-                
+
             }
         };
 
@@ -263,6 +263,15 @@
             ko.applyBindings(viewModel);
             viewModel.init();
             viewModel.token.valueHasMutated();
+
+            $.connection.hub.url = '@(ConfigurationManager.AppSettings["RoomsBookingServerUri"] + "signalr")';
+            var booking = $.connection.bookingHub;
+            booking.client.sendNotification = function (data) {
+                alert(data);
+            };
+
+            $.connection.hub.start().done(function () {
+            });
         });
 
     </script>
