@@ -9,7 +9,9 @@ using BusinessLogic;
 using BusinessLogic.Dto;
 using BusinessLogic.Paging;
 using Data.Entities;
+using Microsoft.AspNet.Identity;
 using Web.Common;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -25,6 +27,17 @@ namespace Web.Controllers
         public EntityDataPage<BookingRequestDto> Get(int skip, int take, int page, int pageSize)
         {
             return _bookingRequestsService.GetBookingRequestsPage(page - 1, pageSize);
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateBookingRequest(BookingRequestModel model)
+        {
+            int userId;
+            if (!int.TryParse(User.Identity.GetUserId(), out userId))
+                return Unauthorized();
+
+            _bookingRequestsService.CreateBookingRequest(model.DateTimeFrom, model.DateTimeTo, model.MeetingRoomId, userId);
+            return Ok();
         }
 
         [HttpPut]

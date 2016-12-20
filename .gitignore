@@ -1,2 +1,12 @@
 /Source/RoomsBookingServer/.vs/RoomsBookingServer/v14/.suo
 /Source/RoomsBookingServer/.vs/config/applicationhost.config
+/Source/RoomsBookingServer/Data/bin
+/Source/RoomsBookingServer/Data/obj
+/Source/RoomsBookingServer/BusinessLogic/bin
+/Source/RoomsBookingServer/BusinessLogic/obj
+/Source/RoomsBookingServer/DataAccess/bin
+/Source/RoomsBookingServer/DataAccess/obj
+/Source/RoomsBookingServer/Utility/bin
+/Source/RoomsBookingServer/Utility/obj
+/Source/RoomsBookingServer/Web/bin
+/Source/RoomsBookingServer/Web/obj

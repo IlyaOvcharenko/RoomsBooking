@@ -15,6 +15,8 @@ namespace BusinessLogic
 
         BookingRequestDto GetBookingRequest(int id);
 
+        void CreateBookingRequest(DateTime from, DateTime to, int roomId, int userId);
+
         void ApproveBookingRequest(int id);
 
         void RejectBookingRequest(int id);

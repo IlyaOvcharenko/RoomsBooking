@@ -63,6 +63,22 @@ namespace BusinessLogic
             };
         }
 
+        public void CreateBookingRequest(DateTime from, DateTime to, int roomId, int userId)
+        {
+            var entity = new BookingRequest
+            {
+                MeetingRoomId = roomId,
+                DateTimeFrom = from,
+                DateTimeTo = to,
+                CreateDateTime = DateTime.Now,
+                CreateUserId = userId
+            };
+
+            _bookingRequestRepository.Add(entity);
+            _bookingRequestRepository.SaveChanges();
+
+        }
+
         public void ApproveBookingRequest(int id)
         {
             var request = _bookingRequestRepository.GetById(id);
